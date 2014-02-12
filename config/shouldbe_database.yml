@@ -1,0 +1,14 @@
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: third_chapter
+  password:
+
+development:
+  database: third_chapter_development
+  <<: *common
+
+test:
+  database: third_chapter_test
+  <<: *common
