@@ -1,6 +1,7 @@
 ThirdChapter::Application.routes.draw do
-  get "users/new"
+  #get "users/new"
 
+	resources :users
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/help',    to: 'static_pages#help',    via: 'get'
