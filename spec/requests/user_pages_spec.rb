@@ -29,6 +29,93 @@ describe "User pages" do
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
+
+			describe "after submission" do
+				before { click_button submit }
+
+				it { should have_title('Sign up') }
+				it { should have_content('error') }
+			end
+
+			describe "no name" do
+				before do
+					fill_in "Name",				with:""
+					fill_in "Email",			with:"user@example.com"
+					fill_in "Password",		with:"foobar"
+					fill_in "Confirmation", with: "foobar"
+				end
+
+				it "should not create a user" do
+					expect { click_button submit }.not_to change(User, :count)
+				end
+			end
+
+			describe "no email" do
+				 before do
+					fill_in "Name",				with:"Example"
+					fill_in "Email",			with:""
+					fill_in "Password",		with:"foobar"
+					fill_in "Confirmation", with: "foobar"
+				end
+
+				it "should not create a user" do
+					expect { click_button submit }.not_to change(User, :count)
+				end
+			end
+
+			describe "bad email" do				 
+				before do
+					fill_in "Name",				with:"Example"
+					fill_in "Email",			with:"bad.X.email@example..."
+					fill_in "Password",		with:"foobar"
+					fill_in "Confirmation", with: "foobar"
+				end
+
+				it "should not create a user" do
+					expect { click_button submit }.not_to change(User, :count)
+				end
+			end
+
+			describe "no password" do				 
+				before do
+					fill_in "Name",				with:"Example"
+					fill_in "Email",			with:"user@example.com"
+					fill_in "Password",		with:""
+					fill_in "Confirmation", with: "foobar"
+				end
+
+				it "should not create a user" do
+					expect { click_button submit }.not_to change(User, :count)
+				end
+			end
+
+			describe "password too short" do				 
+				before do
+					fill_in "Name",				with:"Example"
+					fill_in "Email",			with:"user@example.com"
+					fill_in "Password",		with:"foo"
+					fill_in "Confirmation", with: "foo"
+				end
+
+				it "should not create a user" do
+					expect { click_button submit }.not_to change(User, :count)
+				end
+			end
+
+			describe "confirmation doesn't match" do				 
+				before do
+					fill_in "Name",				with:"Example"
+					fill_in "Email",			with:"user@example.com"
+					fill_in "Password",		with:"foobar"
+					fill_in "Confirmation", with: "foobaz"
+				end
+
+				it "should not create a user" do
+					expect { click_button submit }.not_to change(User, :count)
+				end
+			end
+
+
     end
 
     describe "with valid information" do
