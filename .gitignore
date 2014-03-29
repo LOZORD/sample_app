@@ -16,3 +16,4 @@
 /tmp
 
 database.yml
+database.yml.old_psql
