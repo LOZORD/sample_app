@@ -1,3 +1,4 @@
+# "optimized" from ch 8
 require 'spec_helper'
 
 describe "Authentication" do
@@ -18,11 +19,11 @@ describe "Authentication" do
       before { click_button "Sign in" }
 
       it { should have_title('Sign in') }
-      it { should have_selector('div.alert.alert-error') }
+      it { should have_alert_message('error', nil) }
 
       describe "after visiting another page" do
         before { click_link "Home" }
-        it { should_not have_selector('div.alert.alert-error') }
+        it { should_not have_alert_message('error', nil) }
       end
 
     end #invalid info
@@ -30,9 +31,7 @@ describe "Authentication" do
     describe "with valid information" do
       let (:user) { FactoryGirl.create(:user) }
       before do
-        fill_in "Email",  with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Sign in"
+        valid_signin(user)
       end #valid user setup
 
       it { should have_title(user.name) }
