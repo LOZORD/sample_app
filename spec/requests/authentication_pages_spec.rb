@@ -80,6 +80,11 @@ describe "Authentication" do
           specify { expect(response).to redirect_to(signin_path) }
 
         end #submitting
+
+        describe "visting the user index" do
+          before { visiting users_path }
+          it { should have_title('Sign in') }
+        end
       end #users controller
     end #non-signed in users
 
