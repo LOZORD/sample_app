@@ -62,6 +62,7 @@ describe "Authentication" do
 
         describe "after signing in" do
           it "should render the desired protected page" do
+            #save_and_open_page
             expect(page).to have_title('Edit user')
           end
         end
