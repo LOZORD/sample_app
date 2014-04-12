@@ -62,7 +62,7 @@ describe "Authentication" do
       it { should_not have_link('Sign out') }
 
 
-      describe "when attempting to visit a protected page" do
+      describe "when attempting to visit a protected page" do # friendly forwarding
         before do
           visit edit_user_path(user)
           fill_in "Email",    with: user.email
@@ -75,6 +75,20 @@ describe "Authentication" do
             #save_and_open_page
             expect(page).to have_title('Edit user')
           end
+
+          describe "when signing in again" do
+            before do
+              click_link "Sign out"
+              visit signin_path
+              fill_in "Email", with: user.email
+              fill_in "Password", with: user.password
+              click_button "Sign in"
+            end
+
+            it "should render the default (profile) page" do
+              expect(page).to have_title(user.name)
+            end
+          end # when signing in again
         end
       end # friendly forwarding test
 
