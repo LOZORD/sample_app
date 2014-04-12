@@ -98,7 +98,7 @@ describe "User pages" do
 					fill_in "Name",				with:""
 					fill_in "Email",			with:"user@example.com"
 					fill_in "Password",		with:"foobar"
-					fill_in "Confirmation", with: "foobar"
+					fill_in "Confirm Password", with: "foobar"
 				end
 
 				it "should not create a user" do
@@ -111,7 +111,7 @@ describe "User pages" do
 					fill_in "Name",				with:"Example"
 					fill_in "Email",			with:""
 					fill_in "Password",		with:"foobar"
-					fill_in "Confirmation", with: "foobar"
+					fill_in "Confirm Password", with: "foobar"
 				end
 
 				it "should not create a user" do
@@ -124,7 +124,7 @@ describe "User pages" do
 					fill_in "Name",				with:"Example"
 					fill_in "Email",			with:"bad.X.email@example..."
 					fill_in "Password",		with:"foobar"
-					fill_in "Confirmation", with: "foobar"
+					fill_in "Confirm Password", with: "foobar"
 				end
 
 				it "should not create a user" do
@@ -137,7 +137,7 @@ describe "User pages" do
 					fill_in "Name",				with:"Example"
 					fill_in "Email",			with:"user@example.com"
 					fill_in "Password",		with:""
-					fill_in "Confirmation", with: "foobar"
+					fill_in "Confirm Password", with: "foobar"
 				end
 
 				it "should not create a user" do
@@ -150,7 +150,7 @@ describe "User pages" do
 					fill_in "Name",				with:"Example"
 					fill_in "Email",			with:"user@example.com"
 					fill_in "Password",		with:"foo"
-					fill_in "Confirmation", with: "foo"
+					fill_in "Confirm Password", with: "foo"
 				end
 
 				it "should not create a user" do
@@ -163,7 +163,7 @@ describe "User pages" do
 					fill_in "Name",				with:"Example"
 					fill_in "Email",			with:"user@example.com"
 					fill_in "Password",		with:"foobar"
-					fill_in "Confirmation", with: "foobaz"
+					fill_in "Confirm Password", with: "foobaz"
 				end
 
 				it "should not create a user" do
@@ -176,7 +176,7 @@ describe "User pages" do
 					fill_in "Name",			with:"Example"
 					fill_in "Email",		with:"user@example.com"
 					fill_in "Password", with:"foobar"
-					fill_in "Confirmation",	with:""
+					fill_in "Confirm Password",	with:""
 				end
 	
 				it "should not create a user" do
@@ -191,7 +191,7 @@ describe "User pages" do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
         fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Confirm Password", with: "foobar"
       end
 
       it "should create a user" do
