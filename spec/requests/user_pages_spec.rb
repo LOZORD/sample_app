@@ -5,15 +5,6 @@ describe "User pages" do
 
   subject { page }
 
-  describe "for a non-signed in user" do
-    before do
-      visit root_path
-    end
-
-    it { should_not have_link('Profile') }
-    it { should_not have_link('Settings') }
-  end
-
   describe "index" do
     let(:user) { FactoryGirl.create(:user) }
     before(:each) do
