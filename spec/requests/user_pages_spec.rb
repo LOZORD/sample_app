@@ -264,4 +264,22 @@ describe "User pages" do
     end # forbidden attributes
 
   end #edit
+  describe 'users should not be able to delete others posts' do
+    let!(:user1) { FactoryGirl.create(:user) }
+    let!(:user2) { FactoryGirl.create(:user) }
+
+    before do
+      FactoryGirl.create(:micropost, user: user1, content: 'User 1 is awesome')
+      FactoryGirl.create(:micropost, user: user2, content: 'User 2 is really cool' )
+
+      sign_in user2
+    end
+
+    it 'should not show delete link for other user' do
+      visit user_path(user1)
+      page.should_not have_link('delete')
+    end
+
+  end # user attempts to delete other
+
 end #rspec test

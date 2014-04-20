@@ -31,6 +31,48 @@ describe "Micropost pages" do
     end
   end # create
 
+
+ """ describe 'count microposts' do
+    #puts 'edit micro pages spec'
+    # before fact girl create one post
+    describe 'singular' do
+
+      before do
+        visit root_path
+        FactoryGirl.create(:micropost)
+      end
+      after { Micropost.delete_all }
+      it { should have_content('1 micropost') }
+    end
+    describe 'multiple' do
+      before(:all) { 5.times { FactoryGirl.create(:micropost) } } 
+        #visit root_path
+      after(:all) { Micropost.delete_all }
+      it { should have_content('5 microposts') }
+    end
+  end
+
+
+  describe 'pagination' do
+    before(:all) do 
+      visit root_path
+      { 50.times { FactoryGirl.create(:micropost) } }
+    end
+    after(:all) { Micropost.delete_all }
+
+      it { should have_selector('div.pagination') } 
+
+      it 'should list each micropost' do
+        Micropost.paginate(page: 1).each do |mpost|
+          expect(mpost).to have_selector('li')
+        #end
+      end
+    end
+  end # pagination
+
+  """
+
+
   describe 'micropost destruction' do
     before { FactoryGirl.create(:micropost, user: user) }
 
@@ -41,5 +83,10 @@ describe "Micropost pages" do
         expect { click_link 'delete' }.to change(Micropost, :count).by(-1)
       end
     end # correct user
+
+    describe 'as other user' do
+      it 'should not have a delete link' do
+      end
+    end # as other user
   end # destroy
 end
