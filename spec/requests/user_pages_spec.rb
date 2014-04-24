@@ -116,6 +116,42 @@ describe "User pages" do
         end
       end # end unfollowing
     end # follow/unfollow buttons
+
+    describe 'follower/following counts' do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before do
+        user.follow!(other_user)
+        other_user.follow!(user)
+        visit user_path(user)
+      end
+
+      it { should have_link('1 following', href: following_user_path(user)) }
+      it { should have_link('1 followers', href: followers_user_path(user)) }
+
+      describe 'main user unfollows other user' do
+        before do
+          #let!(:other_other) { FactoryGirl.create(:user) }
+          user.unfollow!(other_user)
+          visit user_path(user)
+        end
+
+        it { should have_link('1 followers', href: followers_user_path(user)) }
+        it { should have_link('0 following', href: following_user_path(user)) }
+
+      end
+
+      describe 'other user unfollows main user' do
+        before do
+          #let!(:other_other) { FactoryGirl.create(:user) }
+          other_user.unfollow!(user)
+          visit user_path(user)
+        end
+
+        it { should have_link('0 followers', href: followers_user_path(user)) }
+        it { should have_link('1 following', href: following_user_path(user)) }
+      end
+    end #foll count
+
   end # profile page
 
   describe "signup page" do
