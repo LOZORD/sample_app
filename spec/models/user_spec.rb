@@ -205,7 +205,19 @@ describe User do
       it { should_not be_following(other_user) }
 
       its(:followed_users) { should_not include(other_user) }
+
     end # unfollowing
+
+
+    it 'should destroy associated relationships' do
+      rels = @user.relationships.to_a
+      @user.destroy
+      expect(rels).not_to be_empty
+      for someRel in rels
+        expect(Relationship.where(id: someRel.id)).to be_empty
+      end
+    end
+
 
     describe 'followed user' do
       subject { other_user }
